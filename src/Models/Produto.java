@@ -1,4 +1,8 @@
-public class Produto {
+package Models;
+
+import Interfaces.IProduto;
+
+public class Produto implements IProduto {
     private String nome;
     private double preco;
     private int quantidade;
@@ -9,18 +13,22 @@ public class Produto {
         this.quantidade = quantidade;
     }
 
+    @Override
     public String getNome() {
         return nome;
     }
 
+    @Override
     public double getPreco() {
         return preco;
     }
 
+    @Override
     public int getQuantidade() {
         return quantidade;
     }
 
+    @Override
     public void setQuantidade(int quantidade) {
         this.quantidade = quantidade;
     }

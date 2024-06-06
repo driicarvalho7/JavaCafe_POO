@@ -1,0 +1,39 @@
+Data do Pedido: 06/06/2024 01:13:08
+
+Produto: teste | Preço Unitário: 5.0 | Quantidade: 5
+
+________________________________________
+Total: R$ 25,00
+
+########################################
+
+Data do Pedido: 06/06/2024 01:13:14
+
+Produto: teste | Preço Unitário: 5.0 | Quantidade: 5
+Produto: pão | Preço Unitário: 50.0 | Quantidade: 5
+Produto: café | Preço Unitário: 10.0 | Quantidade: 5
+
+________________________________________
+Total: R$ 325,00
+
+########################################
+
+Data do Pedido: 06/06/2024 01:13:21
+
+Produto: pão | Preço Unitário: 50.0 | Quantidade: 5
+Produto: café | Preço Unitário: 10.0 | Quantidade: 5
+
+________________________________________
+Total: R$ 300,00
+
+########################################
+
+Data do Pedido: 06/06/2024 01:28:46
+
+Produto: teste | Preço Unitário: 5.0 | Quantidade: 2
+
+________________________________________
+Total: R$ 10,00
+
+########################################
+

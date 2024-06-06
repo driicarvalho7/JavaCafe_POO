@@ -1,8 +1,13 @@
+package Views;
+
+import Models.Inventario;
+import Models.Pedido;
+import Models.Produto;
+import Utils.GlobalConsts;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -16,7 +21,7 @@ public class TelaComprador extends JFrame {
     public TelaComprador(Inventario inventario) {
         pedidoAtual = new Pedido();
 
-        setTitle("Java Café POS - Comprador");
+        setTitle("Java Café - Comprador");
         setSize(600, 600);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLayout(new BorderLayout());
@@ -56,11 +61,23 @@ public class TelaComprador extends JFrame {
         });
 
         finalizarButton.addActionListener(e -> {
-            double total = pedidoAtual.calcularTotal();
-            JOptionPane.showMessageDialog(TelaComprador.this, "Sucesso! Valor total da compra: R$ " + String.format("%.2f", total));
-            pedidoAtual.finalizarPedido();
-            pedidoAtual = new Pedido();  // Reinicia o pedido
-            atualizarAreaPedido();
+            if(pedidoAtual.calcularTotal() > 0){
+                double total = pedidoAtual.calcularTotal();
+                JOptionPane.showMessageDialog(TelaComprador.this, "Sucesso! Valor total da compra: R$ " + String.format("%.2f", total));
+                try {
+                    pedidoAtual.salvarPedido(GlobalConsts.PEDIDOS_FILE);
+                    inventario.salvarInventario(GlobalConsts.INVENTARIO_FILE);
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+                pedidoAtual.finalizarPedido();
+                pedidoAtual = new Pedido();  // Reinicia o pedido
+                atualizarAreaPedido();
+            }
+            else {
+                JOptionPane.showMessageDialog(TelaComprador.this, "Nenhum produto foi selecioando!");
+            }
+
         });
 
         topPanel.add(comboProdutos);
@@ -78,19 +95,27 @@ public class TelaComprador extends JFrame {
         add(bottomPanel, BorderLayout.SOUTH);
 
         // Centralizar o frame na tela
-        setLocationRelativeTo(null);
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        setLocation(0, screenSize.height - getHeight() - 50);
         setVisible(true);
     }
 
+    /**
+     * Atualiza o combo que exibe os produtos caso algum seja inserido ou removido.
+     */
     public static void atualizarComboProdutos(Inventario inventario) {
-        if(comboProdutos != null){
+        if (comboProdutos != null) {
             comboProdutos.removeAllItems();
-            for (Produto p : inventario.produtos.values()) {
+            for (Produto p : inventario.getProdutos().values()) {
                 comboProdutos.addItem(p.getNome());
             }
         }
     }
 
+
+    /**
+     * Atualiza a area que exibe os pedidos.
+     */
     private void atualizarAreaPedido() {
         tabelaModel.setRowCount(0); // Limpa a tabela
 
