@@ -227,11 +227,12 @@ A saída esperada para esse teste seria:
     ````
    private static final String _PATH
     ````
-   Para o caminho que você salvou o projeto.
+   Para o caminho que você salvou o projeto. <br/>
+   **OBS:** Verifique o sistema operacional que você está utilizando, o caminho para UNIX é diferente do Windows.
+   
+## Utilização
 
-# Utilização
-
-Para utilizar o sistema, basta executar o arquivo ``JavaCafeApp.java`` na sua IDE de preferência, eu no caso utilizo o Intelij IDEA, no canto superior direito você pode compilar a experiêntar as funcionalidades do sistema.:
+Para utilizar o sistema, basta executar o arquivo ``JavaCafeApp.java`` na sua IDE de preferência, eu no caso utilizei o Intelij IDEA.
 
 
 ## Aluno
